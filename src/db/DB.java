@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-
 public class DB {
 
 	private static Connection conn = null;
@@ -49,12 +48,13 @@ public class DB {
 	}
 
 	public static void closeStatement(Statement st) {
-		try {
-			st.close();
-		} catch (SQLException e) {
-			throw new DbException(e.getMessage());
+		if (st != null) {
+			try {
+				st.close();
+			} catch (SQLException e) {
+				throw new DbException(e.getMessage());
+			}
 		}
-
 	}
 
 	public static void closeResultSet(ResultSet rs) {
